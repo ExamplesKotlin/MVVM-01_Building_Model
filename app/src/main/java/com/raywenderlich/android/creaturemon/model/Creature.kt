@@ -38,5 +38,5 @@ import android.support.annotation.NonNull
 data class Creature(
     val attributes: CreatureAttributes = CreatureAttributes(),
     val hitPoints: Int = 0,
-    @PrimaryKey @NonNull val name: String = "",
+    @PrimaryKey @NonNull val name: String,
     val drawable: Int = 0)
