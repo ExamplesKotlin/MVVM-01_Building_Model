@@ -130,14 +130,6 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
       bottomDialogFragment.show(supportFragmentManager, "AvatarBottomDialogFragment")
     }
 
-    saveButton.setOnClickListener {
-      if (viewModel.saveCreature()) {
-        Toast.makeText(this, getString(R.string.creature_saved), Toast.LENGTH_SHORT).show()
-        finish()
-      } else {
-        Toast.makeText(this, getString(R.string.error_saving_creature), Toast.LENGTH_SHORT).show()
-      }
-    }
   }
 
   private fun configureLiveDataObservers() {
@@ -146,6 +138,16 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
         hitPoints.text = creature.hitPoints.toString()
         avatarImageView.setImageResource(creature.drawable)
         nameEditText.setText(creature.name)
+      }
+    })
+    viewModel.getSaveLiveData().observe(this, Observer { saved ->
+      saved?.let {
+        if (saved) {
+          Toast.makeText(this, getString(R.string.creature_saved), Toast.LENGTH_SHORT).show()
+          finish()
+        } else {
+          Toast.makeText(this, getString(R.string.error_saving_creature), Toast.LENGTH_SHORT).show()
+        }
       }
     })
   }
