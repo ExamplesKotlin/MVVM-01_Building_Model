@@ -58,4 +58,15 @@ class CreatureViewModelTest {
     assertEquals(false, canSaveCreature)
   }
 
+  @Test
+  fun testCantSaveCreatureWithoutStrength() {
+    creatureViewModel.intelligence = 10
+    creatureViewModel.strength = 0 // <<-- Import!!
+    creatureViewModel.endurance = 7
+    creatureViewModel.drawable = 1
+    creatureViewModel.name = "Creature Test"
+    val canSaveCreature = creatureViewModel.canSaveCreature()
+    assertEquals(false, canSaveCreature)
+  }
+
 }
