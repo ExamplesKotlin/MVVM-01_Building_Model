@@ -35,8 +35,6 @@ class CreatureViewModelTest {
     val stubCreature = Creature(attributes, 87, "Test Creature")
     `when`(mockGenerator.generateCreature(attributes)).thenReturn(stubCreature)
 
-//    `when`(mockGenerator.generateCreature(attributes)).thenReturn(stubCreature)
-
     creatureViewModel.intelligence = 10
     creatureViewModel.strength = 3
     creatureViewModel.endurance = 7
@@ -44,4 +42,16 @@ class CreatureViewModelTest {
     creatureViewModel.updateCreature()
     assertEquals(stubCreature, creatureViewModel.creature)
   }
+
+  @Test
+  fun testCantSaveCreatureWithBlankName() {
+    creatureViewModel.intelligence = 10
+    creatureViewModel.strength = 3
+    creatureViewModel.endurance = 7
+    creatureViewModel.drawable = 1
+    creatureViewModel.name = ""
+    val canSaveCreature = creatureViewModel.canSaveCreature()
+    assertEquals(false, canSaveCreature)
+  }
+
 }
