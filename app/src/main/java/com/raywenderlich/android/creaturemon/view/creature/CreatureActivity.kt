@@ -33,6 +33,7 @@ package com.raywenderlich.android.creaturemon.view.creature
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -42,6 +43,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.raywenderlich.android.creaturemon.R
+import com.raywenderlich.android.creaturemon.databinding.ActivityCreatureBinding
 import com.raywenderlich.android.creaturemon.model.AttributeStore
 import com.raywenderlich.android.creaturemon.model.AttributeType
 import com.raywenderlich.android.creaturemon.model.AttributeValue
@@ -56,11 +58,14 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
 
   private lateinit var viewModel: CreatureViewModel
 
+  lateinit var binding: ActivityCreatureBinding
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_creature)
+    binding = DataBindingUtil.setContentView(this, R.layout.activity_creature)
 
     viewModel = ViewModelProviders.of(this).get(CreatureViewModel::class.java)
+    binding.viewmodel = viewModel
 
     configureUI()
     configureSpinnerAdapters()
