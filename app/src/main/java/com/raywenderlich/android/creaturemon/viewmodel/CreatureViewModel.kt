@@ -4,8 +4,10 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.raywenderlich.android.creaturemon.model.*
+import com.raywenderlich.android.creaturemon.model.room.RoomRepository
 
-class CreatureViewModel(private val generator: CreatureGenerator = CreatureGenerator()) : ViewModel() {
+class CreatureViewModel(private val generator: CreatureGenerator = CreatureGenerator(),
+                        private val repository: CreatureRepository = RoomRepository()) : ViewModel() {
 
   private val creatureLiveData = MutableLiveData<Creature>()
 
